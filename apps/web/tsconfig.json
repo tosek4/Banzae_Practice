@@ -24,6 +24,14 @@
     "downlevelIteration": true,
     "outDir": "./",
     "strict": false,
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "paths": {
+      "@services": ["src/services/index"],
+      "@providers": ["src/providers/index"],
+      "@styles/*": ["src/styles/*"],
+      "@domain/*": ["src/domains/*"],
+      "@components/*": ["src/components/*"],
+      "@components": ["src/components/index"],
+    }
   }
 }

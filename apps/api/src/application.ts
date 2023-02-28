@@ -9,6 +9,8 @@ import { RestApplication } from '@loopback/rest'
 import { ServiceMixin } from '@loopback/service-proxy'
 import path from 'path'
 import { MySequence } from './sequence'
+import { USERS_SERVICE } from './domains/users/keys'
+import { UserService } from './domains/users/services/user.service'
 
 export { ApplicationConfig }
 
@@ -18,11 +20,12 @@ export class ApiApplication extends BootMixin(
   constructor(options: ApplicationConfig = {}) {
     super(options)
 
+    this.setupBindings()
+
     this.sequence(MySequence)
 
     this.static('/', path.join(__dirname, '../public'))
 
-    // Customize @loopback/rest-explorer configuration here
     this.configure(RestExplorerBindings.COMPONENT).to({
       path: '/explorer',
     })
@@ -33,10 +36,19 @@ export class ApiApplication extends BootMixin(
     this.bootOptions = {
       controllers: {
         // Customize ControllerBooter Conventions here
-        dirs: ['controllers'],
+        dirs: ['domains/**/**/controllers'],
         extensions: ['.controller.js'],
         nested: true,
       },
+      repositories: {
+        dirs: ['domains/**/repositories'],
+        extensions: ['.repository.js'],
+        nested: true,
+      },
     }
+  }
+
+  setupBindings(): void {
+    this.bind(USERS_SERVICE).toClass(UserService)
   }
 }
