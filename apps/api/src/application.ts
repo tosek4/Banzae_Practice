@@ -51,4 +51,7 @@ export class ApiApplication extends BootMixin(
   setupBindings(): void {
     this.bind(USERS_SERVICE).toClass(UserService)
   }
+  // setupBindings(): void {
+  //   this.bind(MOVIES_SERVICE).toClass(MoviesService)
+  // }
 }

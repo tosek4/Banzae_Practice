@@ -1,5 +1,3 @@
 export * from './types'
 export * from './user.model'
-export * from './basketballPlayer.model'
-export * from './footballPlayer.model'
-export * from './handballPlayer.model'
+export * from './movies.model'
